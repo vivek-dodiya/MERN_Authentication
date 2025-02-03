@@ -6,6 +6,7 @@ dotenv.config()
 const app = express();
 const port = process.env.PORT || 4000;
 import {connection}  from './config/dbConnection.js';
+import { errorMiddleware } from './middlewares/error.js';
 
 connection()
 
@@ -20,6 +21,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 
+app.use(errorMiddleware)
 
 app.listen(port,()=>{
     console.log(`server is running on port ${port}`)
